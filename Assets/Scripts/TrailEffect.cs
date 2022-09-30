@@ -11,7 +11,7 @@ public class TrailEffect : MonoBehaviour
     private float timeActivated;
     private float currentAlpha;
     
-    private Transform player;
+    private Player player;
     private SpriteRenderer playerSR;
 
     private SpriteRenderer SR;
@@ -21,14 +21,14 @@ public class TrailEffect : MonoBehaviour
     private void OnEnable()
     {
         SR = GetComponent<SpriteRenderer>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerSR = player.GetComponent<SpriteRenderer>();
+        player = Player.Instance;
+        playerSR = player.animator.GetComponent<SpriteRenderer>();
 
         currentAlpha = startAlpha;
         color = playerSR.color;
         SR.sprite = playerSR.sprite;
-        transform.position = player.position;
-        transform.rotation = player.rotation;
+        transform.position = playerSR.transform.position;
+        transform.rotation = playerSR.transform.rotation;
         timeActivated = Time.time;
     }
 
