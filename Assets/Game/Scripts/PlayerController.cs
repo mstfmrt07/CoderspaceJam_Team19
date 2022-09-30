@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
+    public Transform mainBody;
     public Player player;
 
     [Header("Movement & Jump")]
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private int extraJumpsLeft;
 
     private Rigidbody2D rb2D;
-    private Animator animator;
+    private CharacterAnimator animator;
 
     [Header("Dash Skill")]
     public float dashSpeed;
@@ -31,31 +32,30 @@ public class PlayerController : MonoBehaviour
     private bool isDashing;
     private float lastImageXpos;
 
-
     private void Awake()
     {
         animator = player.animator;
-        rb2D = GetComponent<Rigidbody2D>();
+        rb2D = player.rigidBody2D;
         extraJumpsLeft = extraJumpCount;
     }
 
     private void Update()
     {
-        if (!player.isDead)
+        if (!player.IsDead)
         {
             //Input and Animations
             xInput = Input.GetAxisRaw("Horizontal");
             if (xInput != 0 || isDashing)
             {
-                animator.SetBool("IsRunning", true);
+                animator.PlayAnim(AnimationState.RUN);
             }
             else
             {
-                animator.SetBool("IsRunning", false);
+                animator.PlayAnim(AnimationState.IDLE);
             }
 
-            animator.SetBool("Grounded", isGrounded);
-            animator.SetFloat("AirSpeed", rb2D.velocity.y);
+            //animator.SetBool("Grounded", isGrounded);
+            //animator.SetFloat("AirSpeed", rb2D.velocity.y);
 
             if (isGrounded)
             {
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!isDashing && !player.isDead)
+        if (!isDashing && !player.IsDead)
         {
             Move();
         }
@@ -121,17 +121,20 @@ public class PlayerController : MonoBehaviour
     {
         facingRight = !facingRight;
 
-        transform.Rotate(new Vector3(0, 180f, 0));
+        mainBody.Rotate(new Vector3(0, 180f, 0));
     }
 
     void Jump()
     {
         rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce);
-        animator.SetTrigger("Jump");
+
+        animator.PlayAnim(AnimationState.JUMP);
     }
 
     IEnumerator Dash()
     {
+        animator.PlayAnim(AnimationState.DASH);
+
         remainingDashTime = dashCooldown;
         isDashing = true;
 

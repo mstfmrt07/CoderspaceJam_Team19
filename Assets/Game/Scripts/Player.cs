@@ -3,16 +3,17 @@ using UnityEngine;
 public class Player : MSingleton<Player>
 {
     [Header("References")]
-    public Animator animator;
+    public CharacterAnimator animator;
+    public Rigidbody2D rigidBody2D;
 
     [Header("Values")]
-    public int coins;
     public float maxHP;
-    public bool isDead;
 
+    private bool isDead;
     private float currentHP;
 
     public float CurrentHP => currentHP;
+    public bool IsDead => isDead;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class Player : MSingleton<Player>
 
     public void GetDamage(float damage)
     {
-        animator.SetTrigger("Hurt");
+        //Animate
         currentHP -= damage;
 
         Debug.Log(gameObject.name + ", HP: " + currentHP);
@@ -36,7 +37,7 @@ public class Player : MSingleton<Player>
     public void Die()
     {
         isDead = true;
-        animator.SetTrigger("Death");
+        animator.PlayAnim(AnimationState.ANGEL);
 
         Destroy(GetComponent<Rigidbody2D>());
         GetComponent<Collider2D>().enabled = false;
