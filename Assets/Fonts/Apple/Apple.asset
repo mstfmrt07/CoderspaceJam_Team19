@@ -102,9 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 74224584
   material: {fileID: -8034457632195869514}
-  materialHashCode: 0
+  materialHashCode: -2043463960
   m_Version: 1.1.0
   m_SourceFontFileGUID: 149bc7426e90e454cb68077aaea46628
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 149bc7426e90e454cb68077aaea46628, type: 3}
@@ -4552,7 +4552,7 @@ MonoBehaviour:
     italicTypeface: {fileID: 0}
   fontWeights: []
   normalStyle: 0
-  normalSpacingOffset: 0
+  normalSpacingOffset: -12
   boldStyle: 0.75
   boldSpacing: 7
   italicStyle: 35
