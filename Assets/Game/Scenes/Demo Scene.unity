@@ -402,6 +402,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1269427370}
+  - component: {fileID: 1269427371}
   m_Layer: 0
   m_Name: Player Controller
   m_TagString: Untagged
@@ -423,6 +424,31 @@ Transform:
   m_Father: {fileID: 1434025742}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1269427371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269427369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e429170c66d79145a3469de155ae26d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainBody: {fileID: 1434025742}
+  player: {fileID: 1434025744}
+  movementSpeed: 8
+  jumpForce: 14
+  groundCheck: {fileID: 1269427370}
+  checkRadius: 0.5
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 256
+  extraJumpCount: 0
+  dashSpeed: 30
+  dashDuration: 0.15
+  dashCooldown: 2
 --- !u!1 &1434025741
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +459,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1434025742}
   - component: {fileID: 1434025744}
-  - component: {fileID: 1434025743}
   - component: {fileID: 1434025746}
   - component: {fileID: 1434025745}
   m_Layer: 3
@@ -459,30 +484,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1434025743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1434025741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e429170c66d79145a3469de155ae26d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1434025744}
-  movementSpeed: 8
-  jumpForce: 14
-  groundCheck: {fileID: 1269427370}
-  checkRadius: 0.5
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
-  extraJumpCount: 0
-  dashSpeed: 30
-  dashDuration: 0.15
-  dashCooldown: 2
 --- !u!114 &1434025744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,10 +496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564b65a013e36ce49a78c0242fc38f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1894301337}
-  coins: 0
+  animator: {fileID: 1894301339}
+  rigidBody2D: {fileID: 1434025746}
   maxHP: 100
-  isDead: 0
 --- !u!70 &1434025745
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -722,6 +722,7 @@ GameObject:
   - component: {fileID: 1894301336}
   - component: {fileID: 1894301338}
   - component: {fileID: 1894301337}
+  - component: {fileID: 1894301339}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -807,12 +808,25 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1894301339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894301335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54b1bef7675fc249ae96ee52e7891d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1894301337}
 --- !u!1 &2040592950
 GameObject:
   m_ObjectHideFlags: 0

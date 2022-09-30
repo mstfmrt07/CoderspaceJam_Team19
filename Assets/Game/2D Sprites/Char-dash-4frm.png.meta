@@ -1,31 +1,19 @@
 fileFormatVersion: 2
-guid: dcaa123950bda3641b62ae084fb28a67
+guid: bbe26a543edcd1748afa1b5a11306289
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6387699886355760238
-    second: char-burned-9frm_0
+      213: 3670628837291726977
+    second: Char-dash-4frm_0
   - first:
-      213: -5894224519193027300
-    second: char-burned-9frm_1
+      213: 1724430439646213038
+    second: Char-dash-4frm_1
   - first:
-      213: 8888292800206706472
-    second: char-burned-9frm_2
+      213: -9131381662963553565
+    second: Char-dash-4frm_2
   - first:
-      213: -8089835207051154178
-    second: char-burned-9frm_3
-  - first:
-      213: -7352496842324951498
-    second: char-burned-9frm_4
-  - first:
-      213: 4055605035777409807
-    second: char-burned-9frm_5
-  - first:
-      213: -190286679375259406
-    second: char-burned-9frm_6
-  - first:
-      213: 1342747950480922548
-    second: char-burned-9frm_7
+      213: -8686838641190653857
+    second: Char-dash-4frm_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -151,7 +139,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: char-burned-9frm_0
+      name: Char-dash-4frm_0
       rect:
         serializedVersion: 2
         x: 0
@@ -165,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e64c902043ba5a850800000000000000
-      internalID: 6387699886355760238
+      spriteID: 188141dca71b0f230800000000000000
+      internalID: 3670628837291726977
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char-burned-9frm_1
+      name: Char-dash-4frm_1
       rect:
         serializedVersion: 2
         x: 64
@@ -186,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1d1a1b5702833ea0800000000000000
-      internalID: -5894224519193027300
+      spriteID: ea3bbf239586ee710800000000000000
+      internalID: 1724430439646213038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char-burned-9frm_2
+      name: Char-dash-4frm_2
       rect:
         serializedVersion: 2
         x: 128
@@ -207,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8279bf7a53f895b70800000000000000
-      internalID: 8888292800206706472
+      spriteID: 3eaaa86f1c0d64180800000000000000
+      internalID: -9131381662963553565
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char-burned-9frm_3
+      name: Char-dash-4frm_3
       rect:
         serializedVersion: 2
         x: 192
@@ -228,92 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efc6440bdb12bbf80800000000000000
-      internalID: -8089835207051154178
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: char-burned-9frm_4
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 63e3a0db31fa6f990800000000000000
-      internalID: -7352496842324951498
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: char-burned-9frm_5
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f034cc2ea47684830800000000000000
-      internalID: 4055605035777409807
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: char-burned-9frm_6
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2f85956f547fb5df0800000000000000
-      internalID: -190286679375259406
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: char-burned-9frm_7
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4b79c43952662a210800000000000000
-      internalID: 1342747950480922548
+      spriteID: f50b1bad746227780800000000000000
+      internalID: -8686838641190653857
       vertices: []
       indices: 
       edges: []
