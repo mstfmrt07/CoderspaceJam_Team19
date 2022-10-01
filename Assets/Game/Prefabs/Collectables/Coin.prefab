@@ -48,6 +48,7 @@ MonoBehaviour:
   detector: {fileID: 5235000619908609488}
   data: {fileID: 11400000, guid: 81d280f41912c8d43b87f4acb6248d52, type: 2}
   animator: {fileID: 6221751572878156761}
+  collectAnimDuration: 0.5
 --- !u!1 &5235000619908609490
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +197,7 @@ SpriteRenderer:
   m_SortingLayerID: -713749257
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9ee80c33b7114454a8935f96c7acbd50, type: 3}
+  m_Sprite: {fileID: 4606129322115717143, guid: 8c476718e1e6ebc41ae4cee2cd4a8481, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -217,7 +218,7 @@ Animator:
   m_GameObject: {fileID: 5235000620139957695}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7a2d993f4bd9ae249951246619a3ad71, type: 2}
+  m_Controller: {fileID: 22100000, guid: b328a2892017c924ab37fcc44b085137, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -4,6 +4,7 @@ public class Collectable : ExecuteOnCollision, IDisposable
 {
     public CurrencyData data;
     public Animator animator;
+    public float collectAnimDuration;
 
     protected override void HandleCollisionEnter(Collider2D collider)
     {
@@ -17,7 +18,7 @@ public class Collectable : ExecuteOnCollision, IDisposable
     }
     public void Dispose()
     {
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, collectAnimDuration);
     }
 
 }
