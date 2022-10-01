@@ -60,7 +60,7 @@ public class PlayerController : Activatable, IResettable
 
     private void Move()
     {
-        rb2D.velocity = new Vector2(movementSpeed, rb2D.velocity.y);
+        rb2D.velocity = new Vector2(movementSpeed * GameManager.Instance.GameFlowSpeed, rb2D.velocity.y);
         TriggerChunkSpawn();
     }
 

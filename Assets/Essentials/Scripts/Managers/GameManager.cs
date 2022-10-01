@@ -1,12 +1,16 @@
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MSingleton<GameManager>
 {
-    private bool isGameStarted;
+    [Header("Values")]
+    public float gameFlowAcceleration;
+    public float maxGameSpeed;
 
-    public bool GameStarted => isGameStarted;
+    private bool isGamePlaying;
+    private float gameFlowSpeed = 1f;
+    public float GameFlowSpeed => gameFlowSpeed;
+
+    public bool IsGamePlaying => isGamePlaying;
 
     private void Start()
     {
@@ -15,7 +19,7 @@ public class GameManager : MSingleton<GameManager>
 
     private void LoadGame()
     {
-        if (isGameStarted)
+        if (isGamePlaying)
             return;
 
         InputManager.Instance.tapToStart.OnTap += StartGame;
@@ -26,21 +30,31 @@ public class GameManager : MSingleton<GameManager>
 
     public void StartGame()
     {
-        if (isGameStarted)
+        if (isGamePlaying)
             return;
 
-        isGameStarted = true;
+        gameFlowSpeed = 1f;
+        isGamePlaying = true;
         InputManager.Instance.tapToStart.OnTap -= StartGame;
 
         GameEvents.OnGameStarted?.Invoke();
     }
 
-    public void FinishGame()
+    private void Update()
     {
-        if (!isGameStarted)
+        if (!isGamePlaying)
             return;
 
-        isGameStarted = false;
+        if (gameFlowSpeed < maxGameSpeed)
+            gameFlowSpeed += gameFlowAcceleration * Time.deltaTime;
+    }
+
+    public void FinishGame()
+    {
+        if (!isGamePlaying)
+            return;
+
+        isGamePlaying = false;
         Player.Instance.hitbox.OnDestroy -= FinishGame;
 
         GameEvents.OnGameFailed?.Invoke();
@@ -49,16 +63,17 @@ public class GameManager : MSingleton<GameManager>
     public void RecoverGame()
     {
         //Todo implement Recover game
-        if (isGameStarted)
+        if (isGamePlaying)
             return;
 
-        isGameStarted = true;
+        isGamePlaying = true;
         GameEvents.OnGameRecovered?.Invoke();
     }
 
     public void RestartGame()
     {
-        isGameStarted = false;
+        isGamePlaying = false;
+        gameFlowSpeed = 1f;
 
         RecycleBin.Instance.DisposeAll();
         LoadGame();

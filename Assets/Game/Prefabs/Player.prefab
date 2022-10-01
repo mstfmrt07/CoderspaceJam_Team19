@@ -46,7 +46,7 @@ MonoBehaviour:
   activateAtAwake: 0
   player: {fileID: 2301160307736415344}
   movementSpeed: 8
-  jumpForce: 14
+  jumpForce: 15
   groundCheck: {fileID: 2301160307420766154}
   checkRadius: 0.5
   whatIsGround:
@@ -123,7 +123,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 4
   m_Material: {fileID: 6200000, guid: 0afb4dbf0937e694595af28106a381f2, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
