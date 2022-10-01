@@ -1,45 +1,78 @@
 using UnityEngine;
 
-public class Player : MSingleton<Player>
+public class Player : MSingleton<Player>, IGameEventsHandler
 {
     [Header("References")]
+    public Hitbox hitbox;
+    public PlayerController controller;
     public CharacterAnimator animator;
     public Rigidbody2D rigidBody2D;
 
-    [Header("Values")]
-    public float maxHP;
-
-    private bool isDead;
-    private float currentHP;
-
-    public float CurrentHP => currentHP;
-    public bool IsDead => isDead;
+    private bool isAlive;
+    public bool IsAlive => isAlive;
 
     private void Awake()
     {
-        currentHP = maxHP;
+        hitbox.OnDestroy += Die;
+        isAlive = true;
+
+        SubscribeGameEvents();
+    }
+    public void SubscribeGameEvents()
+    {
+        GameEvents.OnGameLoad += OnGameLoad;
+        GameEvents.OnGameStarted += OnGameStarted;
+        GameEvents.OnGameFailed += OnGameFailed;
     }
 
-    public void GetDamage(float damage)
+    public void AttemptJump()
     {
-        //Animate
-        currentHP -= damage;
-
-        Debug.Log(gameObject.name + ", HP: " + currentHP);
-
-        if (currentHP <= 0)
+        if (controller.Jump())
         {
-            Die();
-            Debug.Log(gameObject.name + " died.");
+            animator.PlayAnim(AnimationState.JUMP);
         }
     }
 
-    public void Die()
+    public void AttemptDash()
     {
-        isDead = true;
-        animator.PlayAnim(AnimationState.ANGEL);
+        if (controller.Dash())
+        {
+            animator.PlayAnim(AnimationState.DASH);
+        }
+    }
 
-        Destroy(GetComponent<Rigidbody2D>());
-        GetComponent<Collider2D>().enabled = false;
+    private void Update()
+    {
+        if (isAlive)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+                AttemptDash();
+
+            if (Input.GetKeyDown(KeyCode.Space))
+                AttemptJump();
+        }
+    }
+
+    private void Die()
+    {
+        isAlive = false;
+    }
+
+    public void OnGameLoad()
+    {
+        controller.IsActive = false;
+        animator.PlayAnim(AnimationState.IDLE);
+    }
+
+    public void OnGameStarted()
+    {
+        controller.IsActive = true;
+        animator.PlayAnim(AnimationState.RUN);
+    }
+
+    public void OnGameFailed()
+    {
+        controller.IsActive = false;
+        animator.PlayAnim(AnimationState.ANGEL);
     }
 }

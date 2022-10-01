@@ -1,15 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrailEffectPool : MonoBehaviour
+public class ObjectPool : MonoBehaviour
 {
-    public GameObject afterImagePrefab;
+    public GameObject objectPrefab;
     public int poolSize;
 
     private Queue<GameObject> availableObjects = new Queue<GameObject>();
 
-    public static TrailEffectPool Instance { get; private set; }
+    public static ObjectPool Instance { get; private set; }
 
     private void Awake()
     {
@@ -21,9 +20,9 @@ public class TrailEffectPool : MonoBehaviour
     {
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject afterImageGO = Instantiate(afterImagePrefab);
-            afterImageGO.transform.SetParent(transform);
-            AddToPool(afterImageGO);
+            GameObject go = Instantiate(objectPrefab);
+            go.transform.SetParent(transform);
+            AddToPool(go);
         }
     }
 

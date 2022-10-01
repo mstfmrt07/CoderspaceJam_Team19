@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TrailEffect : MonoBehaviour
@@ -40,7 +38,7 @@ public class TrailEffect : MonoBehaviour
 
         if (Time.time >= (timeActivated + activeTime))
         {
-            TrailEffectPool.Instance.AddToPool(gameObject);
+            ObjectPool.Instance.AddToPool(gameObject);
         }
 
     }

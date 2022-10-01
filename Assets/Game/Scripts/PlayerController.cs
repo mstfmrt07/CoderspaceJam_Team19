@@ -2,10 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Activatable
 {
     [Header("References")]
-    public Transform mainBody;
     public Player player;
 
     [Header("Movement & Jump")]
@@ -14,144 +13,115 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
-    public int extraJumpCount;
-
-    private float xInput;
-    private bool facingRight = true;
-    private bool isGrounded;
-    private int extraJumpsLeft;
-
-    private Rigidbody2D rb2D;
-    private CharacterAnimator animator;
 
     [Header("Dash Skill")]
     public float dashSpeed;
     public float dashDuration;
     public float dashCooldown;
-    private float remainingDashTime;
+    public float minDistanceBetweenImages;
+
+    private float dashCountDown;
     private bool isDashing;
     private float lastImageXpos;
 
-    private void Awake()
+    private bool isGrounded;
+    private Rigidbody2D rb2D;
+
+    protected override void OnActivate()
     {
-        animator = player.animator;
+        base.OnActivate();
+
         rb2D = player.rigidBody2D;
-        extraJumpsLeft = extraJumpCount;
     }
 
-    private void Update()
+    protected override void Tick()
     {
-        if (!player.IsDead)
-        {
-            //Input and Animations
-            xInput = Input.GetAxisRaw("Horizontal");
-            if (xInput != 0 || isDashing)
-            {
-                animator.PlayAnim(AnimationState.RUN);
-            }
-            else
-            {
-                animator.PlayAnim(AnimationState.IDLE);
-            }
-
-            //animator.SetBool("Grounded", isGrounded);
-            //animator.SetFloat("AirSpeed", rb2D.velocity.y);
-
-            if (isGrounded)
-            {
-                extraJumpsLeft = extraJumpCount;
-            }
-
-            if (remainingDashTime > 0)
-            {
-                remainingDashTime -= Time.deltaTime;
-            }
-
-            if ((facingRight && xInput < 0) || (!facingRight && xInput > 0))
-            {
-                Flip();
-            }
-
-            if (Input.GetButtonDown("Jump") && !isDashing)
-            {
-                if (extraJumpsLeft > 0)
-                {
-                    Jump();
-                    extraJumpsLeft--;
-                }
-                else if (isGrounded)
-                {
-                    Jump();
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && remainingDashTime <= 0)
-            {
-                TrailEffectPool.Instance.GetFromPool();
-                lastImageXpos = transform.position.x;
-                StartCoroutine(Dash());
-            }
-
-            if (isDashing)
-            {
-                if (Mathf.Abs(transform.position.x - lastImageXpos) > 0.1f)
-                {
-                    TrailEffectPool.Instance.GetFromPool();
-                    lastImageXpos = transform.position.x;
-                }
-            }
-        }
-    }
-    private void FixedUpdate()
-    {
-        if (!isDashing && !player.IsDead)
+        if (!isDashing)
         {
             Move();
         }
-        else
-        {
-            rb2D.velocity = new Vector2(rb2D.velocity.x, 0f);
-        }
 
+        if (dashCountDown > 0f)
+        {
+            dashCountDown -= Time.deltaTime;
+        }
+    }
+
+    private void Move()
+    {
+        rb2D.velocity = new Vector2(movementSpeed, rb2D.velocity.y);
+        TriggerChunkSpawn();
+    }
+
+    private void TriggerChunkSpawn()
+    {
+        Debug.Log($"trigger spawn: {ChunkSpawner.Instance.TriggerSpawnPosition}");
+        if (player.transform.position.x >= ChunkSpawner.Instance.TriggerSpawnPosition)
+        {
+            Debug.Log("Yes");
+            ChunkSpawner.Instance.Spawn();
+        }
+    }
+
+    public bool Jump()
+    {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
 
+        if (isGrounded)
+            rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce);
+
+        return isGrounded;
     }
 
-    void Flip()
+    private void Stop()
     {
-        facingRight = !facingRight;
+        if (rb2D == null)
+            return;
 
-        mainBody.Rotate(new Vector3(0, 180f, 0));
+        rb2D.velocity = Vector2.zero;
     }
 
-    void Jump()
+    public bool Dash()
     {
-        rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce);
+        if (isDashing || dashCountDown > 0f)
+            return false;
 
-        animator.PlayAnim(AnimationState.JUMP);
+        StartCoroutine(DashCoroutine());
+        return true;
     }
 
-    IEnumerator Dash()
+    IEnumerator DashCoroutine()
     {
-        animator.PlayAnim(AnimationState.DASH);
-
-        remainingDashTime = dashCooldown;
         isDashing = true;
+        var dashTimer = dashDuration;
+        dashCountDown = dashCooldown;
 
-        float gravity = rb2D.gravityScale;
-        float direction = facingRight ? 1f : -1f;
+        float gravity = player.rigidBody2D.gravityScale;
+        player.rigidBody2D.gravityScale = 0f;
+        player.rigidBody2D.velocity = new Vector2(dashSpeed, player.rigidBody2D.velocity.y);
 
-        rb2D.gravityScale = 0f; // reset gravity
+        while (dashTimer > 0f)
+        {
+            dashTimer -= Time.deltaTime;
 
-        rb2D.velocity = new Vector2(dashSpeed * direction, rb2D.velocity.y);
+            if (Mathf.Abs(player.transform.position.x - lastImageXpos) >= minDistanceBetweenImages)
+            {
+                ObjectPool.Instance.GetFromPool();
+                lastImageXpos = transform.position.x;
+            }
 
-        yield return new WaitForSeconds(dashDuration);
-        rb2D.gravityScale = gravity;
+            yield return new WaitForEndOfFrame();
+        }
+
+        player.rigidBody2D.gravityScale = gravity;
         isDashing = false;
     }
 
-    void Move()
+    protected override void OnDeactivate()
     {
-        rb2D.velocity = new Vector2(xInput * movementSpeed, rb2D.velocity.y);
+        base.OnDeactivate();
+
+        Stop();
+        rb2D = null;
     }
 } 
