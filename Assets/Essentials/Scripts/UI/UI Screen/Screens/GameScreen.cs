@@ -1,10 +1,13 @@
-using UnityEngine.UI;
+
 
 public class GameScreen : UIScreen
 {
+    public ScoreUI scoreUI;
+
     public override void Load()
     {
         base.Load();
+        scoreUI.IsActive = true;
     }
 
     public override void Reset()
@@ -15,5 +18,6 @@ public class GameScreen : UIScreen
     public override void Close()
     {
         base.Close();
+        scoreUI.IsActive = false;
     }
 }

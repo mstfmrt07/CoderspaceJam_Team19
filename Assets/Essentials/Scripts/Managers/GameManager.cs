@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MSingleton<GameManager>
@@ -8,9 +9,15 @@ public class GameManager : MSingleton<GameManager>
 
     private bool isGamePlaying;
     private float gameFlowSpeed = 1f;
-    public float GameFlowSpeed => gameFlowSpeed;
+    private int score;
+    private bool highScoreBeaten;
 
+    public float GameFlowSpeed => gameFlowSpeed;
     public bool IsGamePlaying => isGamePlaying;
+    public int Score => score;
+    public int HighScore => SaveManager.Instance.HighScore;
+
+    public Action OnHighScoreBeaten;
 
     private void Start()
     {
@@ -25,6 +32,9 @@ public class GameManager : MSingleton<GameManager>
         InputManager.Instance.tapToStart.OnTap += StartGame;
         Player.Instance.hitbox.OnDestroy += FinishGame;
 
+        score = 0;
+        highScoreBeaten = false;
+
         GameEvents.OnGameLoad?.Invoke();
     }
 
@@ -35,6 +45,7 @@ public class GameManager : MSingleton<GameManager>
 
         gameFlowSpeed = 1f;
         isGamePlaying = true;
+
         InputManager.Instance.tapToStart.OnTap -= StartGame;
 
         GameEvents.OnGameStarted?.Invoke();
@@ -44,6 +55,15 @@ public class GameManager : MSingleton<GameManager>
     {
         if (!isGamePlaying)
             return;
+
+        score = (int)Player.Instance.distanceMeter.Distance;
+
+        if (score > HighScore && HighScore > 0 && !highScoreBeaten)
+        {
+            highScoreBeaten = true;
+            OnHighScoreBeaten?.Invoke();
+        }
+
 
         if (gameFlowSpeed < maxGameSpeed)
             gameFlowSpeed += gameFlowAcceleration * Time.deltaTime;

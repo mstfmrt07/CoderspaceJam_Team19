@@ -5,6 +5,7 @@ public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
     [Header("References")]
     public Hitbox hitbox;
     public PlayerController controller;
+    public DistanceMeter distanceMeter;
     public CharacterAnimator animator;
     public Rigidbody2D rigidBody2D;
 
@@ -72,6 +73,7 @@ public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
     public void OnGameStarted()
     {
         controller.IsActive = true;
+        distanceMeter.IsActive = true;
 
         hitbox.OnDestroy += Die;
         controller.OnJumpEnded += Run;
@@ -82,6 +84,8 @@ public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
     public void OnGameFailed()
     {
         controller.IsActive = false;
+        distanceMeter.IsActive = true;
+
         hitbox.OnDestroy -= Die;
         controller.OnJumpEnded -= Run;
     }
