@@ -1,5 +1,6 @@
+using UnityEngine.UI;
 
-public class LoseScreen : UIScreen
+public class ShopScreen : UIScreen
 {
     public override void Load()
     {
@@ -14,10 +15,5 @@ public class LoseScreen : UIScreen
     public override void Close()
     {
         base.Close();
-    }
-
-    public void RestartAction()
-    {
-        GameManager.Instance.RestartGame();
     }
 }

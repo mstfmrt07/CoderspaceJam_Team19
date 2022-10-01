@@ -29,9 +29,9 @@ public class GameManager : MSingleton<GameManager>
         if (isGameStarted)
             return;
 
+        isGameStarted = true;
         InputManager.Instance.tapToStart.OnTap -= StartGame;
 
-        isGameStarted = true;
         GameEvents.OnGameStarted?.Invoke();
     }
 
@@ -41,12 +41,26 @@ public class GameManager : MSingleton<GameManager>
             return;
 
         isGameStarted = false;
+        Player.Instance.hitbox.OnDestroy -= FinishGame;
+
         GameEvents.OnGameFailed?.Invoke();
+    }
+
+    public void RecoverGame()
+    {
+        //Todo implement Recover game
+        if (isGameStarted)
+            return;
+
+        isGameStarted = true;
+        GameEvents.OnGameRecovered?.Invoke();
     }
 
     public void RestartGame()
     {
         isGameStarted = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        RecycleBin.Instance.DisposeAll();
+        LoadGame();
     }
 }

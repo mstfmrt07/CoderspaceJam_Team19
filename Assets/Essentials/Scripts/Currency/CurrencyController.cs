@@ -15,9 +15,4 @@ public class CurrencyController : MSingleton<CurrencyController>
     {
         money.AddAmount(amountToAdd);
     }
-
-    public void ResetMoney()
-    {
-        money.Amount = 0;
-    }
 }

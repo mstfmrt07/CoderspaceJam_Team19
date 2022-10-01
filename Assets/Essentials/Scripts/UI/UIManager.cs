@@ -23,6 +23,7 @@ public class UIManager : MSingleton<UIManager>, IGameEventsHandler
         GameEvents.OnGameLoad += OnGameLoad;
         GameEvents.OnGameStarted += OnGameStarted;
         GameEvents.OnGameFailed += OnGameFailed;
+        GameEvents.OnGameRecovered += OnGameRecovered;
     }
 
     public void SwitchScreen(UIScreen Screen)
@@ -31,12 +32,12 @@ public class UIManager : MSingleton<UIManager>, IGameEventsHandler
             CloseScreen(currentScreen);
 
         LoadScreen(Screen);
+        currentScreen = Screen;
     }
 
     public void LoadScreen(UIScreen Screen)
     {
         Screen.Load();
-        currentScreen = Screen;
     }
 
     public void ResetScreen(UIScreen Screen)
@@ -90,5 +91,10 @@ public class UIManager : MSingleton<UIManager>, IGameEventsHandler
     public void OnGameFailed()
     {
         StartCoroutine(SwitchScreenAfterSeconds(loseScreen, loseScreenDelay));
+    }
+
+    public void OnGameRecovered()
+    {
+        throw new System.NotImplementedException();
     }
 }

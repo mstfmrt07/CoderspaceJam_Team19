@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CurrencyUI : MonoBehaviour
 {
     public CurrencyData data;
     public Image currencyImage;
-    public Text valueText;
+    public TextMeshProUGUI valueText;
 
     private void Awake()
     {
@@ -21,6 +22,6 @@ public class CurrencyUI : MonoBehaviour
     private void UpdateUI()
     {
         currencyImage.sprite = data.sprite;
-        valueText.text = data.Amount.ToString("00");
+        valueText.text = "x" + data.Amount.ToString();
     }
 }

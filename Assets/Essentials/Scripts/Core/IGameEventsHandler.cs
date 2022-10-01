@@ -4,4 +4,5 @@ public interface IGameEventsHandler
     void OnGameLoad();
     void OnGameStarted();
     void OnGameFailed();
+    void OnGameRecovered();
 }

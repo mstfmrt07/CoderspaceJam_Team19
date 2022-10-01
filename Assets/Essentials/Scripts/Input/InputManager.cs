@@ -14,6 +14,7 @@ public class InputManager : MSingleton<InputManager>, IGameEventsHandler
         GameEvents.OnGameLoad += OnGameLoad;
         GameEvents.OnGameStarted += OnGameStarted;
         GameEvents.OnGameFailed += OnGameFailed;
+        GameEvents.OnGameRecovered += OnGameRecovered;
     }
 
     public void OnGameLoad()
@@ -28,5 +29,10 @@ public class InputManager : MSingleton<InputManager>, IGameEventsHandler
 
     public void OnGameFailed()
     {
+    }
+
+    public void OnGameRecovered()
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -4,11 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="New Currency Data", menuName = "Currency/CurrencyData")]
 public class CurrencyData: ScriptableObject
 {
-    public CurrencyType type;
     public Sprite sprite;
-    public int Amount;
+    public int Amount => amount;
 
     public Action<int> OnCurrencyUpdated;
+    private int amount;
 
     public void AddAmount(int amountToAdd)
     {
@@ -16,7 +16,7 @@ public class CurrencyData: ScriptableObject
 
         if (newAmount >= 0)
         {
-            Amount = newAmount;
+            amount = newAmount;
 
             if (OnCurrencyUpdated != null)
                 OnCurrencyUpdated.Invoke(newAmount);
@@ -26,11 +26,4 @@ public class CurrencyData: ScriptableObject
             Debug.Log("Couldn't update amount.");
         }
     }
-}
-
-public enum CurrencyType
-{
-    Money,
-    Gold,
-    Diamond,
 }
