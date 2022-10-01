@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6397972910a101546a3d46ed924dbb72, type: 3}
-  m_Name: Insurance Item
+  m_Name: Slot Item
   m_EditorClassIdentifier: 
-  inventoryItem: {fileID: 11400000, guid: fc3ab283e770fe547bae78b9dcbd16f1, type: 2}
-  itemName: Health Insurance
-  icon: {fileID: 21300000, guid: 797d823d9295f4c4098f4b6faabf47d1, type: 3}
-  description: AN INSURANCE A DAY  KEEPS TROUBLES AWAY! RECOVERS MURPHY WHEN HE FAILS
-    A GAME.
-  maxCount: 1
+  inventoryItem: {fileID: 11400000, guid: dda2efd5f8435194293c63c82b4abe59, type: 2}
+  itemName: Insurance Slot
+  icon: {fileID: 21300000, guid: fe7603ce4d3878c49a6e46dc4e4359ec, type: 3}
+  description: INCREASES THE NUMBER OF MAXIMUM INSURANCES YOU CAN HAVE IN A SINGLE
+    GAME.
+  maxCount: 5
   requiredCurrency: {fileID: 11400000, guid: 81d280f41912c8d43b87f4acb6248d52, type: 2}
   upgradeType: 1
-  baseCost: 50
-  costMultiplier: 1
+  baseCost: 100
+  costMultiplier: 2

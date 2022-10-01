@@ -5,6 +5,12 @@ using System;
 public class Purchasable : ScriptableObject
 {
     private int currentLevel = 1;
+    [Header("Item Specs")]
+    public CurrencyData inventoryItem;
+    public string itemName;
+    public Sprite icon;
+    [TextArea(4, 12)] public string description;
+    public int maxCount;
 
     [Header("Cost")]
     public CurrencyData requiredCurrency;
@@ -32,14 +38,16 @@ public class Purchasable : ScriptableObject
         }
     }
 
-    public void Purchase()
+    public bool Purchase()
     {
         if (requiredCurrency.Amount >= CurrentCost)
         {
             CurrentLevel += 1;
             CurrencyController.Instance.AddToCurrency(requiredCurrency, -CurrentCost);
             OnItemUpgraded?.Invoke();
+            return true;
         }
+        return false;
     }
     
     public void Reset()
@@ -49,7 +57,7 @@ public class Purchasable : ScriptableObject
 
     public override string ToString()
     {
-        return ("Item: " + name + " / Level: " + CurrentLevel + " / Current: " + CurrentCost);
+        return ("Item: " + itemName + " / Level: " + CurrentLevel + " / Current: " + CurrentCost);
     }
 }
 
