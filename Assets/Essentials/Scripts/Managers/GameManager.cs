@@ -29,7 +29,6 @@ public class GameManager : MSingleton<GameManager>
         if (isGamePlaying)
             return;
 
-        InputManager.Instance.tapToStart.OnTap += StartGame;
         Player.Instance.hitbox.OnDestroy += FinishGame;
 
         score = 0;
@@ -45,8 +44,6 @@ public class GameManager : MSingleton<GameManager>
 
         gameFlowSpeed = 1f;
         isGamePlaying = true;
-
-        InputManager.Instance.tapToStart.OnTap -= StartGame;
 
         GameEvents.OnGameStarted?.Invoke();
     }

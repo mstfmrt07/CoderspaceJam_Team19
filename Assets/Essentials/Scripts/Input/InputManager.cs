@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class InputManager : MSingleton<InputManager>, IGameEventsHandler
 {
-    public TapDetector tapToStart;
-
     private void Awake()
     {
         SubscribeGameEvents();
@@ -19,12 +17,10 @@ public class InputManager : MSingleton<InputManager>, IGameEventsHandler
 
     public void OnGameLoad()
     {
-        tapToStart.IsActive = true;
     }
 
     public void OnGameStarted()
     {
-        tapToStart.IsActive = false;
     }
 
     public void OnGameFailed()
@@ -33,6 +29,5 @@ public class InputManager : MSingleton<InputManager>, IGameEventsHandler
 
     public void OnGameRecovered()
     {
-        throw new System.NotImplementedException();
     }
 }
