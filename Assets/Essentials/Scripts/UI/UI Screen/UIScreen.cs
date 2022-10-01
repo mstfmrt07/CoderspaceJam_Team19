@@ -31,6 +31,6 @@ public class UIScreen : MonoBehaviour, IScreen
     {
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
-        canvasGroup.DOFade(0f, 0.1f);
+        canvasGroup.alpha = 0f;
     }
 }

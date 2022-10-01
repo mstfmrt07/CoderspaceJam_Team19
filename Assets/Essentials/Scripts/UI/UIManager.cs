@@ -6,11 +6,9 @@ public class UIManager : MSingleton<UIManager>, IGameEventsHandler
     [Header("References")]
     public StartScreen startScreen;
     public GameScreen gameScreen;
-    public WinScreen winScreen;
     public LoseScreen loseScreen;
 
     [Header("Values")]
-    public float winScreenDelay;
     public float loseScreenDelay;
 
     private UIScreen currentScreen;
@@ -22,10 +20,9 @@ public class UIManager : MSingleton<UIManager>, IGameEventsHandler
 
     public void SubscribeGameEvents()
     {
-        GameEvents.OnLevelLoad += OnLevelLoad;
-        GameEvents.OnLevelStarted += OnLevelStarted;
-        GameEvents.OnLevelCompleted += OnLevelCompleted;
-        GameEvents.OnLevelFailed += OnLevelFailed;
+        GameEvents.OnGameLoad += OnGameLoad;
+        GameEvents.OnGameStarted += OnGameStarted;
+        GameEvents.OnGameFailed += OnGameFailed;
     }
 
     public void SwitchScreen(UIScreen Screen)
@@ -77,7 +74,7 @@ public class UIManager : MSingleton<UIManager>, IGameEventsHandler
         SwitchScreen(screen);
     }
 
-    public void OnLevelLoad()
+    public void OnGameLoad()
     {
         ResetAllScreens();
         CloseAllScreens();
@@ -85,17 +82,12 @@ public class UIManager : MSingleton<UIManager>, IGameEventsHandler
         SwitchScreen(startScreen);
     }
 
-    public void OnLevelStarted()
+    public void OnGameStarted()
     {
         SwitchScreen(gameScreen);
     }
 
-    public void OnLevelCompleted()
-    {
-        StartCoroutine(SwitchScreenAfterSeconds(winScreen, winScreenDelay));
-    }
-
-    public void OnLevelFailed()
+    public void OnGameFailed()
     {
         StartCoroutine(SwitchScreenAfterSeconds(loseScreen, loseScreenDelay));
     }

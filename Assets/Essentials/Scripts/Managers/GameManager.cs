@@ -1,15 +1,27 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MSingleton<GameManager>, IResettable
+public class GameManager : MSingleton<GameManager>
 {
-    private bool isGameStarted = false;
+    private bool isGameStarted;
 
     public bool GameStarted => isGameStarted;
 
-    private void Awake()
+    private void Start()
     {
-        ApplyReset();
+        LoadGame();
+    }
+
+    private void LoadGame()
+    {
+        if (isGameStarted)
+            return;
+
+        InputManager.Instance.tapToStart.OnTap += StartGame;
+        Player.Instance.hitbox.OnDestroy += FinishGame;
+
+        GameEvents.OnGameLoad?.Invoke();
     }
 
     public void StartGame()
@@ -17,29 +29,24 @@ public class GameManager : MSingleton<GameManager>, IResettable
         if (isGameStarted)
             return;
 
+        InputManager.Instance.tapToStart.OnTap -= StartGame;
+
         isGameStarted = true;
-        GameEvents.OnLevelStarted?.Invoke();
+        GameEvents.OnGameStarted?.Invoke();
     }
 
-    public void FinishGame(bool winCondition)
+    public void FinishGame()
     {
         if (!isGameStarted)
             return;
 
-        if (winCondition)
-        {
-            GameEvents.OnLevelCompleted?.Invoke();
-        }
-        else
-        {
-            GameEvents.OnLevelFailed?.Invoke();
-        }
-
         isGameStarted = false;
+        GameEvents.OnGameFailed?.Invoke();
     }
 
-    public void ApplyReset()
+    public void RestartGame()
     {
         isGameStarted = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
