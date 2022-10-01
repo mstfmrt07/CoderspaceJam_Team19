@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hitbox : ExecuteOnCollision
+public class Hitbox : ExecuteOnCollision, IResettable
 {
     public int initialHealth;
     public List<LayerMaskDamage> damageLayerPairs;
@@ -14,10 +14,10 @@ public class Hitbox : ExecuteOnCollision
     private bool destroyed = false;
     public int CurrentHealth => currentHealth;
 
-    protected override void Awake()
+    public void ApplyReset()
     {
-        base.Awake();
         currentHealth = initialHealth;
+        destroyed = false;
     }
 
     protected override void HandleCollisionEnter(Collider2D collider)
@@ -40,6 +40,8 @@ public class Hitbox : ExecuteOnCollision
     {
         if (destroyed)
             return;
+
+        Debug.Log("Hitbox get damage");
 
         currentHealth -= damage;
 

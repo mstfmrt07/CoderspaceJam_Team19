@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Chunk : MonoBehaviour
+public class Chunk : MonoBehaviour, IDisposable
 {
     public Vector2 size;
 
@@ -8,5 +8,9 @@ public class Chunk : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position, size);
+    }
+    public void Dispose()
+    {
+        Destroy(gameObject);
     }
 }

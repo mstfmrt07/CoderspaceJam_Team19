@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MSingleton<Player>, IGameEventsHandler
+public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
 {
     [Header("References")]
     public Hitbox hitbox;
@@ -11,18 +11,20 @@ public class Player : MSingleton<Player>, IGameEventsHandler
     private bool isAlive;
     public bool IsAlive => isAlive;
 
+    private Vector3 initialPos;
+
     private void Awake()
     {
-        hitbox.OnDestroy += Die;
-        isAlive = true;
-
+        initialPos = transform.position;
         SubscribeGameEvents();
     }
+
     public void SubscribeGameEvents()
     {
         GameEvents.OnGameLoad += OnGameLoad;
         GameEvents.OnGameStarted += OnGameStarted;
         GameEvents.OnGameFailed += OnGameFailed;
+        GameEvents.OnGameRecovered += OnGameRecovered;
     }
 
     public void AttemptJump()
@@ -60,19 +62,43 @@ public class Player : MSingleton<Player>, IGameEventsHandler
 
     public void OnGameLoad()
     {
+        isAlive = true;
         controller.IsActive = false;
+        transform.position = initialPos;
+
         animator.PlayAnim(AnimationState.IDLE);
     }
 
     public void OnGameStarted()
     {
         controller.IsActive = true;
+
+        hitbox.OnDestroy += Die;
+        controller.OnJumpEnded += Run;
+
         animator.PlayAnim(AnimationState.RUN);
     }
 
     public void OnGameFailed()
     {
         controller.IsActive = false;
-        animator.PlayAnim(AnimationState.ANGEL);
+        hitbox.OnDestroy -= Die;
+        controller.OnJumpEnded -= Run;
+    }
+
+    public void OnGameRecovered()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void ApplyReset()
+    {
+        isAlive = true;
+        animator.PlayAnim(AnimationState.IDLE);
+    }
+
+    private void Run()
+    {
+        animator.PlayAnim(AnimationState.RUN);
     }
 }

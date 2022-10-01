@@ -1,14 +1,17 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
-public class PlayerController : Activatable
+public class PlayerController : Activatable, IResettable
 {
     [Header("References")]
     public Player player;
 
-    [Header("Movement & Jump")]
+    [Header("Movement")]
     public float movementSpeed;
+
+    [Header("Jump Skill")]
     public float jumpForce;
     public Transform groundCheck;
     public float checkRadius;
@@ -25,7 +28,11 @@ public class PlayerController : Activatable
     private float lastImageXpos;
 
     private bool isGrounded;
+
     private Rigidbody2D rb2D;
+
+    public Action OnReachedChunkSpawnPoint;
+    public Action OnJumpEnded;
 
     protected override void OnActivate()
     {
@@ -36,15 +43,19 @@ public class PlayerController : Activatable
 
     protected override void Tick()
     {
-        if (!isDashing)
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
+
+        if (isGrounded && rb2D.velocity.y < 0f)
         {
-            Move();
+            Debug.Log("Player landed");
+            OnJumpEnded?.Invoke();
         }
 
+        if (!isDashing)
+            Move();
+
         if (dashCountDown > 0f)
-        {
             dashCountDown -= Time.deltaTime;
-        }
     }
 
     private void Move()
@@ -53,19 +64,10 @@ public class PlayerController : Activatable
         TriggerChunkSpawn();
     }
 
-    private void TriggerChunkSpawn()
-    {
-        Debug.Log($"trigger spawn: {ChunkSpawner.Instance.TriggerSpawnPosition}");
-        if (player.transform.position.x >= ChunkSpawner.Instance.TriggerSpawnPosition)
-        {
-            Debug.Log("Yes");
-            ChunkSpawner.Instance.Spawn();
-        }
-    }
-
     public bool Jump()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
+        if (!IsActive)
+            return false;
 
         if (isGrounded)
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce);
@@ -83,7 +85,7 @@ public class PlayerController : Activatable
 
     public bool Dash()
     {
-        if (isDashing || dashCountDown > 0f)
+        if (!IsActive || isDashing || dashCountDown > 0f)
             return false;
 
         StartCoroutine(DashCoroutine());
@@ -98,7 +100,7 @@ public class PlayerController : Activatable
 
         float gravity = player.rigidBody2D.gravityScale;
         player.rigidBody2D.gravityScale = 0f;
-        player.rigidBody2D.velocity = new Vector2(dashSpeed, player.rigidBody2D.velocity.y);
+        player.rigidBody2D.velocity = new Vector2(dashSpeed, 0f);
 
         while (dashTimer > 0f)
         {
@@ -117,11 +119,28 @@ public class PlayerController : Activatable
         isDashing = false;
     }
 
+    private void TriggerChunkSpawn()
+    {
+        if (player.transform.position.x >= ChunkSpawner.Instance.TriggerSpawnPosition)
+            OnReachedChunkSpawnPoint?.Invoke();
+    }
+
+
     protected override void OnDeactivate()
     {
         base.OnDeactivate();
 
         Stop();
+    }
+
+    public void ApplyReset()
+    {
         rb2D = null;
+
+        dashCountDown = 0f;
+        lastImageXpos = 0f;
+
+        isDashing = false;
+        isGrounded = false;
     }
 } 

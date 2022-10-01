@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum AnimationState { IDLE = 0, RUN = 1, JUMP = 2, DASH = 3, ANGEL = 4, BURN = 5 }
+public enum AnimationState { IDLE = 0, RUN = 1, JUMP = 2, DASH = 3, ANGEL = 4, BURN = 5, SLIDE_FALL = 6 }
 
 public class CharacterAnimator : MonoBehaviour
 {
