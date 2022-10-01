@@ -83,7 +83,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2301160307736415341}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2301160308314099192}
@@ -313,10 +313,6 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 128
     damage: 1
-  - layers:
-      serializedVersion: 2
-      m_Bits: 64
-    damage: 1
 --- !u!61 &2301160308360228721
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -358,6 +354,6 @@ MonoBehaviour:
   activateAtAwake: 1
   targetLayer:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 128
   deactivateOnDetect: 0
   deactivateOnExit: 0
