@@ -32,6 +32,7 @@ public class PlayerController : Activatable, IResettable
     private Rigidbody2D rb2D;
 
     public Action OnReachedChunkSpawnPoint;
+    public Action OnDashEnded;
     public Action OnJumpEnded;
 
     protected override void OnActivate()
@@ -117,6 +118,7 @@ public class PlayerController : Activatable, IResettable
 
         player.rigidBody2D.gravityScale = gravity;
         isDashing = false;
+        OnDashEnded?.Invoke();
     }
 
     private void TriggerChunkSpawn()

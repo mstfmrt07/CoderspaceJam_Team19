@@ -29,7 +29,7 @@ public class PurchasableUI : MonoBehaviour
         requiredCurrencyImage.sprite = item.requiredCurrency.sprite;
         itemImage.sprite = item.icon;
 
-        valueText.text = item.CurrentCost.ToString();
+        valueText.text = "x" + item.CurrentCost.ToString();
         titleText.text = item.itemName.ToUpper();
         descriptionText.text = item.description.ToUpper();
     }

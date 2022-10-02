@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class CurrencyUI : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class CurrencyUI : MonoBehaviour
 
     private void OnCurrencyUpdated(int amount)
     {
+        currencyImage.transform.DOKill();
+        currencyImage.transform.DOPunchScale(Vector3.one * 0.1f, 0.25f, 1).OnKill(() => currencyImage.transform.localScale = Vector3.one);
         UpdateUI();
     }
 

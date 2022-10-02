@@ -78,6 +78,7 @@ public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
 
         hitbox.OnDestroy += Die;
         controller.OnJumpEnded += Run;
+        controller.OnDashEnded += Run;
 
         animator.PlayAnim(AnimationState.RUN);
     }
@@ -90,6 +91,7 @@ public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
 
         hitbox.OnDestroy -= Die;
         controller.OnJumpEnded -= Run;
+        controller.OnDashEnded -= Run;
     }
 
     public void OnGameRecovered()
