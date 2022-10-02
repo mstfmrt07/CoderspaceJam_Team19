@@ -30,30 +30,31 @@ public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
 
     public void AttemptJump()
     {
+        Debug.Log("Attempted jump");
+        if (!isAlive)
+            return;
+
         if (controller.Jump())
-        {
             animator.PlayAnim(AnimationState.JUMP);
-        }
     }
 
     public void AttemptDash()
     {
+        Debug.Log("Attempted dash");
+        if (!isAlive)
+            return;
+
         if (controller.Dash())
-        {
             animator.PlayAnim(AnimationState.DASH);
-        }
     }
 
     private void Update()
     {
-        if (isAlive)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-                AttemptDash();
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            AttemptDash();
 
-            if (Input.GetKeyDown(KeyCode.Space))
-                AttemptJump();
-        }
+        if (Input.GetKeyDown(KeyCode.Space))
+            AttemptJump();
     }
 
     private void Die()
