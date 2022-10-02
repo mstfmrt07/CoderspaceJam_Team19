@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 9ee80c33b7114454a8935f96c7acbd50, type: 3}
   Amount: 0
+  maximumAmount: 99999

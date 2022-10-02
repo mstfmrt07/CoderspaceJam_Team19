@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Insurance
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 797d823d9295f4c4098f4b6faabf47d1, type: 3}
-  maximumAmount: 3
+  maximumAmount: 1
   amount: 1
