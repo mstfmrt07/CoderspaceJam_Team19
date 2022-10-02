@@ -51,6 +51,9 @@ TagManager:
   - name: Ground
     uniqueID: 338992705
     locked: 0
+  - name: Decoration
+    uniqueID: 3581798841
+    locked: 0
   - name: Obstacles
     uniqueID: 3581218039
     locked: 0

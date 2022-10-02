@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3558576838943659248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12, y: -4, z: 0}
+  m_LocalPosition: {x: -18, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5235000618736073551}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 8123495986662168279}
   - component: {fileID: 8057530658500858016}
   m_Layer: 0
-  m_Name: Flower Pot
+  m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,12 +158,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detector: {fileID: 5235000619908609488}
   obstacleAnimator: {fileID: 6221751572878156761}
-  obstacleType: 1
-  playerAnimState: 4
+  obstacleType: 2
+  playerAnimState: 5
   triggerDetector: {fileID: 8177664058269951583}
   warningMark: {fileID: 3408975249869766787}
-  triggerWaitTime: 1
-  rocketSpeed: 0
+  triggerWaitTime: 0
+  rocketSpeed: 12
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -183,7 +183,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -202,9 +202,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.75, y: 1.5}
-  m_Direction: 0
+  m_Offset: {x: -0.25, y: 0}
+  m_Size: {x: 2, y: 0.75}
+  m_Direction: 1
 --- !u!1 &5235000619908609490
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +250,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.25, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -261,7 +261,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 1.5}
+  m_Size: {x: 2, y: 0.75}
   m_EdgeRadius: 0
 --- !u!114 &5235000619908609488
 MonoBehaviour:
@@ -306,13 +306,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5235000620139957695}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5235000618736073551}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &5235000620139957693
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -353,7 +353,7 @@ SpriteRenderer:
   m_SortingLayerID: -713749257
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fe7603ce4d3878c49a6e46dc4e4359ec, type: 3}
+  m_Sprite: {fileID: 6289564497794271295, guid: 3405423868590a446975d38291cccda3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -374,7 +374,7 @@ Animator:
   m_GameObject: {fileID: 5235000620139957695}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7a2d993f4bd9ae249951246619a3ad71, type: 2}
+  m_Controller: {fileID: 22100000, guid: 1eb51ea6b2be7774494ecb80640636ae, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -396,11 +396,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1646394634808924926, guid: 9b6bc9a537f043545b344e09e85c8a83, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.25
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1646394634808924926, guid: 9b6bc9a537f043545b344e09e85c8a83, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1646394634808924926, guid: 9b6bc9a537f043545b344e09e85c8a83, type: 3}
       propertyPath: m_LocalPosition.z

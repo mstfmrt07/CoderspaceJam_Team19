@@ -223,6 +223,7 @@ MonoBehaviour:
   - {fileID: 9006611516640119622, guid: 67080a921043e3942a6e84c310ba1ef7, type: 3}
   - {fileID: 9006611516640119622, guid: 8787e9a95776019478d80110e787ec09, type: 3}
   - {fileID: 9006611516640119622, guid: d60f15bfe9db2864ab54eafcb4628944, type: 3}
+  - {fileID: 9006611516640119622, guid: dee5e2aa0d4347a439ff3ce34b4c0a35, type: 3}
   maxChunkSize: 3
   chunkSpawnThreshold: 32
 --- !u!4 &288135566
@@ -377,7 +378,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 

@@ -20,13 +20,10 @@ public class SoundManager : MSingleton<SoundManager>, IGameEventsHandler
     private void Awake()
     {
         SubscribeGameEvents();
-    }
-
-    private void Start()
-    {
         bgSource = PlaySound(bgMusic, true);
         bgSource.volume = 0.5f;
     }
+
     public void SubscribeGameEvents()
     {
         GameEvents.OnGameLoad += OnGameLoad;

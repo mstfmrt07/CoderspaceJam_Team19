@@ -43,6 +43,7 @@ public class Purchasable : ScriptableObject
         {
             CurrentLevel += 1;
             CurrencyController.Instance.AddToCurrency(requiredCurrency, -CurrentCost);
+            requiredCurrency.OnCurrencyUpdated?.Invoke(requiredCurrency.Amount);
             OnItemUpgraded?.Invoke();
             return true;
         }
