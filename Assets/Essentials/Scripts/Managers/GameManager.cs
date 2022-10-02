@@ -84,6 +84,7 @@ public class GameManager : MSingleton<GameManager>
             return;
 
         isGamePlaying = true;
+
         GameEvents.OnGameRecovered?.Invoke();
     }
 
@@ -91,6 +92,9 @@ public class GameManager : MSingleton<GameManager>
     {
         isGamePlaying = false;
         gameFlowSpeed = 1f;
+
+        if (score > HighScore)
+            SaveManager.Instance.HighScore = score;
 
         RecycleBin.Instance.DisposeAll();
         LoadGame();
