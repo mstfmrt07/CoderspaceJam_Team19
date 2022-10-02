@@ -8,6 +8,7 @@ public class CurrencyUI : MonoBehaviour
     public CurrencyData data;
     public Image currencyImage;
     public TextMeshProUGUI valueText;
+    public bool showMaxAmount;
 
     private void Awake()
     {
@@ -25,6 +26,11 @@ public class CurrencyUI : MonoBehaviour
     private void UpdateUI()
     {
         currencyImage.sprite = data.sprite;
-        valueText.text = "x" + data.Amount.ToString();
+
+        var text = "x" + data.Amount.ToString();
+        if (showMaxAmount)
+            text += "/" + data.maximumAmount.ToString();
+
+        valueText.text = text;
     }
 }

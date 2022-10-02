@@ -25,15 +25,15 @@ public class ShopController : MSingleton<ShopController>
     public void UpdateInsuranceSlots()
     {
         slotItem.inventoryItem.Amount = slotItem.CurrentLevel;
-        insuranceItem.maxCount = slotItem.inventoryItem.Amount;
+        insuranceItem.inventoryItem.maximumAmount = slotItem.inventoryItem.Amount;
 
-        if (insuranceItem.inventoryItem.Amount > insuranceItem.maxCount)
-            insuranceItem.inventoryItem.Amount = insuranceItem.maxCount;
+        if (insuranceItem.inventoryItem.Amount > insuranceItem.inventoryItem.maximumAmount)
+            insuranceItem.inventoryItem.Amount = insuranceItem.inventoryItem.maximumAmount;
     }
 
     public bool BuyItem(Purchasable item)
     {
-        if (item.inventoryItem.Amount >= item.maxCount)
+        if (item.inventoryItem.Amount >= item.inventoryItem.maximumAmount)
         {
             WarningMessage.Instance.Show("Reached max item count.");
             return false;

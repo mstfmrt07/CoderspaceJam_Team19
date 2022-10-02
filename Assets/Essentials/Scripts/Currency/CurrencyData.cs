@@ -5,6 +5,7 @@ using UnityEngine;
 public class CurrencyData: ScriptableObject
 {
     public Sprite sprite;
+    public int maximumAmount;
     public int Amount { get => amount; set => amount = value; }
 
     public Action<int> OnCurrencyUpdated;

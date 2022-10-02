@@ -10,7 +10,6 @@ public class Purchasable : ScriptableObject
     public string itemName;
     public Sprite icon;
     [TextArea(4, 12)] public string description;
-    public int maxCount;
 
     [Header("Cost")]
     public CurrencyData requiredCurrency;
