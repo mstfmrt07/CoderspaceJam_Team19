@@ -54,7 +54,7 @@ MonoBehaviour:
     m_Bits: 256
   dashSpeed: 30
   dashDuration: 0.15
-  dashCooldown: 1.5
+  dashCooldown: 1
   minDistanceBetweenImages: 0.1
 --- !u!1 &2301160307736415341
 GameObject:

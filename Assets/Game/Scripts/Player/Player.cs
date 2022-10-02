@@ -35,7 +35,10 @@ public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
             return;
 
         if (controller.Jump())
+        {
             animator.PlayAnim(AnimationState.JUMP);
+            SoundManager.Instance.PlaySound(SoundManager.Instance.jumpClip);
+        }
     }
 
     public void AttemptDash()
@@ -45,7 +48,10 @@ public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
             return;
 
         if (controller.Dash())
+        {
             animator.PlayAnim(AnimationState.DASH);
+            SoundManager.Instance.PlaySound(SoundManager.Instance.dashClip);
+        }
     }
 
     private void Update()
@@ -59,7 +65,11 @@ public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
 
     private void Die()
     {
+        if (!isAlive)
+            return;
+
         isAlive = false;
+        SoundManager.Instance.PlaySound(SoundManager.Instance.dieClip);
     }
 
     public void OnGameLoad()

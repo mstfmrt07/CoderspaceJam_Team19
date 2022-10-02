@@ -9,6 +9,7 @@ public class Collectable : ExecuteOnCollision, IDisposable
     protected override void HandleCollisionEnter(Collider2D collider)
     {
         CurrencyController.Instance.AddToCurrency(data, 1);
+        SoundManager.Instance.PlaySound(SoundManager.Instance.collectClip);
         animator.SetTrigger("Action");
         Dispose();
     }

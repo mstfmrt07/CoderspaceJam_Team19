@@ -2,6 +2,16 @@ using UnityEngine;
 
 public class SoundManager : MSingleton<SoundManager>
 {
+    [Header("References")]
+    public AudioClip jumpClip;
+    public AudioClip dashClip;
+    public AudioClip fallClip;
+    public AudioClip collectClip;
+    public AudioClip lightningClip;
+    public AudioClip explosionClip;
+    public AudioClip flowerPotClip;
+    public AudioClip dieClip;
+
     public AudioSource PlaySound(AudioClip clip, bool looping = false, float lifeTime = -1f)
     {
         if (!SaveManager.Instance.SoundOn)
