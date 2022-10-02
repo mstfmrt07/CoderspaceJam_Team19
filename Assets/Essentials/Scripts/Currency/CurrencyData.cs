@@ -5,10 +5,10 @@ using UnityEngine;
 public class CurrencyData: ScriptableObject
 {
     public Sprite sprite;
-    public int Amount => amount;
+    public int Amount { get => amount; set => amount = value; }
 
     public Action<int> OnCurrencyUpdated;
-    private int amount;
+    [SerializeField] private int amount;
 
     public void AddAmount(int amountToAdd)
     {

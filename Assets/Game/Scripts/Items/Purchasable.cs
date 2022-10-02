@@ -4,7 +4,7 @@ using System;
 [CreateAssetMenu(fileName = "Purchasable", menuName = "Purchasables/New Purchasable")]
 public class Purchasable : ScriptableObject
 {
-    private int currentLevel = 1;
+    [SerializeField] private int currentLevel = 1;
     [Header("Item Specs")]
     public CurrencyData inventoryItem;
     public string itemName;

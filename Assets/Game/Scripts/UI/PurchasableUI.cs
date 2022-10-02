@@ -5,7 +5,6 @@ using TMPro;
 public class PurchasableUI : MonoBehaviour
 {
     public Purchasable item;
-    public CanvasGroup canvasGroup;
     public Image itemImage;
     public Image requiredCurrencyImage;
 
@@ -33,7 +32,5 @@ public class PurchasableUI : MonoBehaviour
         valueText.text = item.CurrentCost.ToString();
         titleText.text = item.itemName.ToUpper();
         descriptionText.text = item.description.ToUpper();
-
-        canvasGroup.interactable = (item.inventoryItem.Amount < item.maxCount) && (item.requiredCurrency.Amount >= item.CurrentCost);
     }
 }
