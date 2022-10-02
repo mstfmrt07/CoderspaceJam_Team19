@@ -104,7 +104,9 @@ public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
         distanceMeter.IsActive = true;
 
         rigidBody2D.bodyType = RigidbodyType2D.Dynamic;
+
         hitbox.ApplyReset();
+        animator.ApplyReset();
 
         hitbox.OnDestroy += Die;
         controller.OnJumpEnded += Run;
