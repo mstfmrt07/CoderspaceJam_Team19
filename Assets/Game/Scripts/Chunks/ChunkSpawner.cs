@@ -16,6 +16,7 @@ public class ChunkSpawner : MSingleton<ChunkSpawner>, IGameEventsHandler
     public float TriggerSpawnPosition => GetEndPoint(globalCoords: true).x - chunkSpawnThreshold;
 
     private Chunk lastChunk;
+    private int lastChunkPrefabIndex = -1;
     private bool spawningFirstChunk;
 
     private void Awake()
@@ -31,6 +32,7 @@ public class ChunkSpawner : MSingleton<ChunkSpawner>, IGameEventsHandler
             Remove();
 
         lastChunk = null;
+        lastChunkPrefabIndex = -1;
 
         spawningFirstChunk = true;
 
@@ -43,7 +45,14 @@ public class ChunkSpawner : MSingleton<ChunkSpawner>, IGameEventsHandler
         if (currentChunks.Count == maxChunkSize)
             Remove();
 
-        var chunkPrefab = chunkPrefabs[Random.Range(0, chunkPrefabs.Count)];
+        int randomIndex;
+        do
+        {
+            randomIndex = Random.Range(0, chunkPrefabs.Count);
+        }
+        while (randomIndex == lastChunkPrefabIndex);
+
+        var chunkPrefab = chunkPrefabs[randomIndex];
 
         if (spawningFirstChunk)
         {
@@ -55,7 +64,9 @@ public class ChunkSpawner : MSingleton<ChunkSpawner>, IGameEventsHandler
         chunk.transform.localPosition = GetEndPoint(globalCoords: false) + (Vector2.right * chunk.size.x / 2f);
 
         currentChunks.Enqueue(chunk);
+
         lastChunk = chunk;
+        lastChunkPrefabIndex = randomIndex;
     }
 
     public void Remove()
