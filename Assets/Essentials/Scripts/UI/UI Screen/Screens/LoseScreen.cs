@@ -20,4 +20,9 @@ public class LoseScreen : UIScreen
     {
         GameManager.Instance.RestartGame();
     }
+
+    public void ReviveAction()
+    {
+        ShopController.Instance.UseInsurance();
+    }
 }
