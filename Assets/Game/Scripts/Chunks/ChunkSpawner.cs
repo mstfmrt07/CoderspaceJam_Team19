@@ -120,6 +120,6 @@ public class ChunkSpawner : MSingleton<ChunkSpawner>, IGameEventsHandler
 
     public void OnGameRecovered()
     {
-        throw new System.NotImplementedException();
+        Player.Instance.controller.OnReachedChunkSpawnPoint += Spawn;
     }
 }

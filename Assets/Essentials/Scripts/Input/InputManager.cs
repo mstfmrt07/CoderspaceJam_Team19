@@ -42,5 +42,10 @@ public class InputManager : MSingleton<InputManager>, IGameEventsHandler
 
     public void OnGameRecovered()
     {
+        jumpButton.OnTap += Player.Instance.AttemptJump;
+        dashButton.OnTap += Player.Instance.AttemptDash;
+
+        jumpButton.IsActive = true;
+        dashButton.IsActive = true;
     }
 }

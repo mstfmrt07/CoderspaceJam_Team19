@@ -95,6 +95,6 @@ public class UIManager : MSingleton<UIManager>, IGameEventsHandler
 
     public void OnGameRecovered()
     {
-        throw new System.NotImplementedException();
+        SwitchScreen(gameScreen);
     }
 }

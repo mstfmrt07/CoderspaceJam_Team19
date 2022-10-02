@@ -83,6 +83,7 @@ public class GameManager : MSingleton<GameManager>
         if (isGamePlaying)
             return;
 
+        Player.Instance.hitbox.OnDestroy += FinishGame;
         isGamePlaying = true;
 
         GameEvents.OnGameRecovered?.Invoke();

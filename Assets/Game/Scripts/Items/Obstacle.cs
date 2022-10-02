@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Obstacle : ExecuteOnCollision
+public class Obstacle : ExecuteOnCollision, IDisposable
 {
     public Animator obstacleAnimator;
     public ObstacleType obstacleType;
@@ -101,6 +101,11 @@ public class Obstacle : ExecuteOnCollision
 
     protected override void HandleCollisionExit(Collider2D collider)
     {
+    }
+
+    public void Dispose()
+    {
+        Destroy(gameObject);
     }
 }
 

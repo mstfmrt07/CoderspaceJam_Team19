@@ -75,6 +75,8 @@ public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
     public void OnGameStarted()
     {
         controller.IsActive = true;
+
+        distanceMeter.Init();
         distanceMeter.IsActive = true;
 
         hitbox.OnDestroy += Die;
@@ -97,7 +99,18 @@ public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
 
     public void OnGameRecovered()
     {
-        throw new System.NotImplementedException();
+        isAlive = true;
+        controller.IsActive = true;
+        distanceMeter.IsActive = true;
+
+        rigidBody2D.bodyType = RigidbodyType2D.Dynamic;
+        hitbox.ApplyReset();
+
+        hitbox.OnDestroy += Die;
+        controller.OnJumpEnded += Run;
+        controller.OnDashEnded += Run;
+
+        animator.PlayAnim(AnimationState.RUN);
     }
 
     public void ApplyReset()

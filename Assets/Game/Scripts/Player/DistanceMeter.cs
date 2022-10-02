@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DistanceMeter : Activatable
+public class DistanceMeter : Activatable, IResettable
 {
     public Transform target;
 
@@ -12,9 +12,13 @@ public class DistanceMeter : Activatable
     protected override void OnActivate()
     {
         base.OnActivate();
-        initialPos = target.position;
-        distance = 0f;
     }
+
+    public void Init()
+    {
+        initialPos = target.position;
+    }
+
     protected override void Tick()
     {
         distance = (target.position.x - initialPos.x);
@@ -23,6 +27,11 @@ public class DistanceMeter : Activatable
     protected override void OnDeactivate()
     {
         base.OnDeactivate();
+    }
+
+    public void ApplyReset()
+    {
+        distance = 0f;
         initialPos = Vector2.zero;
     }
 }
