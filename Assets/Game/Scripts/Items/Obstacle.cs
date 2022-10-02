@@ -6,9 +6,58 @@ public class Obstacle : ExecuteOnCollision
     public ObstacleType obstacleType;
     public AnimationState playerAnimState;
 
+    [Header("Trigger")]
+    public CollisionDetector triggerDetector;
+    public GameObject warningMark;
+    public float triggerWaitTime;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        InitObstacle();
+    }
+
+    private void InitObstacle()
+    {
+        if (triggerDetector != null)
+            triggerDetector.OnEnter += TriggerAction;
+
+        if (warningMark != null)
+            warningMark.SetActive(false);
+
+        switch (obstacleType)
+        {
+            case ObstacleType.Banana:
+                break;
+            case ObstacleType.FlowerPot:
+                var rb = GetComponent<Rigidbody2D>();
+                rb.bodyType = RigidbodyType2D.Kinematic;
+                break;
+            case ObstacleType.Rocket:
+                break;
+            case ObstacleType.Barrel:
+                break;
+            case ObstacleType.Lightning:
+                detector.GetComponent<Collider2D>().enabled = false;
+                detector.IsActive = false;
+                break;
+            default:
+                break;
+        }
+    }
+
     protected override void HandleCollisionEnter(Collider2D collider)
     {
-        ObstacleAction();
+        OnObstacleHit();
+    }
+
+    private void OnObstacleHit()
+    {
+        if (warningMark != null)
+            warningMark.SetActive(false);
+
+        Player.Instance.animator.PlayAnim(playerAnimState);
     }
 
     public void ObstacleAction()
@@ -20,6 +69,8 @@ public class Obstacle : ExecuteOnCollision
                 break;
             case ObstacleType.FlowerPot:
                 Debug.Log("This is Flower Pot");
+                var rb = GetComponent<Rigidbody2D>();
+                rb.bodyType = RigidbodyType2D.Dynamic;
                 break;
             case ObstacleType.Rocket:
                 Debug.Log("This is Rocket");
@@ -29,14 +80,23 @@ public class Obstacle : ExecuteOnCollision
                 break;
             case ObstacleType.Lightning:
                 Debug.Log("This is Lightning");
+                detector.GetComponent<Collider2D>().enabled = true;
+                detector.IsActive = true;
                 break;
             default:
                 Debug.Log("This is undefined obstacle");
                 break;
         }
 
-        Player.Instance.animator.PlayAnim(playerAnimState);
         obstacleAnimator.SetTrigger("Action");
+
+    }
+
+    public virtual void TriggerAction(Collider2D collider)
+    {
+        this.Wait(triggerWaitTime, () => ObstacleAction());
+        if (warningMark != null)
+            warningMark.SetActive(true);
     }
 
     protected override void HandleCollisionExit(Collider2D collider)

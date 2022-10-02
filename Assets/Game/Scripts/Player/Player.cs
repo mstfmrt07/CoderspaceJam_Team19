@@ -66,6 +66,7 @@ public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
         isAlive = true;
         controller.IsActive = false;
         transform.position = initialPos;
+        rigidBody2D.bodyType = RigidbodyType2D.Dynamic;
 
         animator.PlayAnim(AnimationState.IDLE);
     }
@@ -85,6 +86,7 @@ public class Player : MSingleton<Player>, IGameEventsHandler, IResettable
     {
         controller.IsActive = false;
         distanceMeter.IsActive = true;
+        rigidBody2D.bodyType = RigidbodyType2D.Kinematic;
 
         hitbox.OnDestroy -= Die;
         controller.OnJumpEnded -= Run;
