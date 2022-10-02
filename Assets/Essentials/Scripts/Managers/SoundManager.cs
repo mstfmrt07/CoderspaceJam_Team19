@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class SoundManager : MSingleton<SoundManager>
+public class SoundManager : MSingleton<SoundManager>, IGameEventsHandler
 {
     [Header("References")]
+    public AudioClip bgMusic;
     public AudioClip jumpClip;
     public AudioClip dashClip;
     public AudioClip fallClip;
@@ -11,6 +12,28 @@ public class SoundManager : MSingleton<SoundManager>
     public AudioClip explosionClip;
     public AudioClip flowerPotClip;
     public AudioClip dieClip;
+    public AudioClip clickClip;
+
+
+    private AudioSource bgSource;
+
+    private void Awake()
+    {
+        SubscribeGameEvents();
+    }
+
+    private void Start()
+    {
+        bgSource = PlaySound(bgMusic, true);
+        bgSource.volume = 0.5f;
+    }
+    public void SubscribeGameEvents()
+    {
+        GameEvents.OnGameLoad += OnGameLoad;
+        GameEvents.OnGameStarted += OnGameStarted;
+        GameEvents.OnGameFailed += OnGameFailed;
+        GameEvents.OnGameRecovered += OnGameRecovered;
+    }
 
     public AudioSource PlaySound(AudioClip clip, bool looping = false, float lifeTime = -1f)
     {
@@ -39,5 +62,24 @@ public class SoundManager : MSingleton<SoundManager>
         }
 
         return audioSource;
+    }
+
+    public void OnGameLoad()
+    {
+        bgSource.Play();
+    }
+
+    public void OnGameStarted()
+    {
+    }
+
+    public void OnGameFailed()
+    {
+        bgSource.Pause();
+    }
+
+    public void OnGameRecovered()
+    {
+        bgSource.Play();
     }
 }

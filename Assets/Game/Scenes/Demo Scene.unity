@@ -363,7 +363,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.8, y: -3.2, z: -10}
+  m_LocalPosition: {x: 6.4, y: -3.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7851050480905502671}
@@ -497,7 +497,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636391819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.8, y: -3.2, z: -10}
+  m_LocalPosition: {x: 6.4, y: -3.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1050482201}
@@ -1462,14 +1462,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a42bf1075ad28f438740c0da5ecc786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgMusic: {fileID: 8300000, guid: a3b61cf0ad26c7d4892399ed82ea8730, type: 3}
   jumpClip: {fileID: 8300000, guid: 8bf38d5fef31eac469c5d49dd6d4fa24, type: 3}
-  dashClip: {fileID: 8300000, guid: 1caa568e1facab94bae46991ef2def8c, type: 3}
+  dashClip: {fileID: 8300000, guid: 5cb23a7d9aac08d40902ea1df23996d0, type: 3}
   fallClip: {fileID: 8300000, guid: eb43d616209fac14baf1e11d193d6c44, type: 3}
   collectClip: {fileID: 8300000, guid: 49ea3a75a55902e438b3e85694ca1f2b, type: 3}
   lightningClip: {fileID: 8300000, guid: 226912fd49a640b4abde933d27696ef8, type: 3}
   explosionClip: {fileID: 8300000, guid: 51288edf98221b040bf1bc65deb62faf, type: 3}
   flowerPotClip: {fileID: 8300000, guid: 16a49f8f79e14434d8776966b06760d4, type: 3}
   dieClip: {fileID: 8300000, guid: 22a94c3bc5eb1714c9510bf3d3320883, type: 3}
+  clickClip: {fileID: 8300000, guid: 1a37df205d231b04fa73e0ea470db4ce, type: 3}
 --- !u!1 &1858449081
 GameObject:
   m_ObjectHideFlags: 0
